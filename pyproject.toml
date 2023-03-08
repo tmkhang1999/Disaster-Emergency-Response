@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "disaster-emergency-response"
+version = "0.1.0"
+description = ""
+authors = ["MINH KHANG TRAN <74235084+tmkhang1999@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "disaster_emergency_response"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^1.5.3"
+SQLAlchemy = "^2.0.5.post1"
+jupyter = "^1.0.0"
+scikit-learn = "^1.2.1"
+plotly = "^5.13.1"
+joblib = "^1.2.0"
+Flask = "^2.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
