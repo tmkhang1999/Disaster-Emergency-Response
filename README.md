@@ -1,5 +1,5 @@
 
-![Disaster Img](https://cdn.pixabay.com/photo/2017/11/08/12/57/storm-2930337_1280.jpg)
+![Disaster Image](https://cdn.pixabay.com/photo/2017/11/08/12/57/storm-2930337_1280.jpg)
 
 <h3 align="center">Disaster Emergency Response</h3>
 
@@ -9,7 +9,7 @@
   <a href="https://www.kaggle.com/datasets/sidharth178/disaster-response-messages?select=disaster_categories.csv"><strong>Explore Figure Eight Dataset »</strong></a>
 </p>
 
-video
+https://user-images.githubusercontent.com/74235084/224092245-bc61bada-c525-436f-926c-677484457597.mp4
 
 ## Table of Contents
 1. [Installation](#installation)
