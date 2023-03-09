@@ -1,5 +1,5 @@
 
-![Disaster Image](https://cdn.pixabay.com/photo/2018/09/28/11/11/yorkshire-3709066_1280.jpg)
+![Disaster Image](https://cdn.pixabay.com/photo/2020/03/22/16/45/new-york-4957752_1280.jpg)
 
 <h3 align="center">Disaster Emergency Response</h3>
 
@@ -37,6 +37,7 @@ git clone https://github.com/tmkhang1999/Disaster-Emergency-Response.git
 poetry install
 ```
 This will create a new virtual environment for the project and install all of its dependencies, using the information from the poetry.toml and poetry.lock files in the project directory.
+
 4. Set up the database, train model and save the model:
 ```angular2html
 python data/etl_pipeline.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db response
