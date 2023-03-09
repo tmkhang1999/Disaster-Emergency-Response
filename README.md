@@ -1,8 +1,6 @@
 
-![Disaster Image](https://cdn.pixabay.com/photo/2020/03/22/16/45/new-york-4957752_1280.jpg)
-
+![Disaster Image](img/img_title.jpg)
 <h3 align="center">Disaster Emergency Response</h3>
-
 <p align="center">
   Analyzing message data to categorize these events, and subsequently send the messages to an appropriate disaster relief agency
   <br>
