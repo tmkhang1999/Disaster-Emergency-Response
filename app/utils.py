@@ -1,7 +1,10 @@
 import joblib
 import pandas as pd
-
 from sqlalchemy import create_engine, text
+
+import nltk
+from nltk.stem import WordNetLemmatizer
+nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger', 'omw-1.4'])
 
 
 def load_data(sql_path, table_name, model_path):
@@ -14,3 +17,29 @@ def load_data(sql_path, table_name, model_path):
     model = joblib.load(model_path)
 
     return df, model
+
+
+def tokenize(txt):
+    """
+    This 'tokenize' function is used for deployment
+
+    INPUT:
+    txt - Raw text
+
+    OUTPUT:
+    clean_tokens - a list of tokens that are lemmatized, lowered, and stripped from text
+    """
+    # tokenize text
+    tokens = nltk.word_tokenize(txt)
+
+    # initiate lemmatizer
+    lemmatizer = WordNetLemmatizer()
+
+    # iterate through each token
+    clean_tokens = []
+    for tok in tokens:
+        # lemmatize, lower, then strip token
+        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+        clean_tokens.append(clean_tok)
+
+    return clean_tokens

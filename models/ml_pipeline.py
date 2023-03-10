@@ -32,7 +32,7 @@ def load_data(database_path, table_name):
     query = f'SELECT * FROM {table_name}'
     df = pd.read_sql_query(sql=text(query), con=engine.connect())
 
-    # Split input and output
+    # Split the dataframe into input and output
     X = df['message']
     y = df.iloc[:, 4:]
 

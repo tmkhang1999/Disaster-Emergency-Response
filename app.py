@@ -1,5 +1,5 @@
 from app import create_app
-from models.ml_pipeline import tokenize
+from app.utils import tokenize
 
 if __name__ == '__main__':
     # Initialize app
