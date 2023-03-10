@@ -43,6 +43,14 @@ def clean_data(df):
     df.drop(['categories'], inplace=True, axis=1)
     df = pd.concat([df, categories], axis=1)
 
+    # Drop columns with a single value
+    for col in df.columns:
+        if len(df[col].unique()) == 1:
+            df = df.drop(col, axis=1)
+
+    # Drop row with '2' in 'related' column
+    df.drop(df[df['related'] == 2].index, axis=0)
+
     # Remove duplicates
     if df.duplicated().sum() > 0:
         df.drop_duplicates(inplace=True)
