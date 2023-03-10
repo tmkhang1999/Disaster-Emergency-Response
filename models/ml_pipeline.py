@@ -1,4 +1,6 @@
 import argparse
+
+import joblib
 import pandas as pd
 from sqlalchemy import create_engine, text
 
@@ -9,7 +11,7 @@ from nltk.stem import WordNetLemmatizer
 nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger', 'omw-1.4'])
 
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.multioutput import MultiOutputClassifier
@@ -70,18 +72,24 @@ def tokenize(txt):
 def build_model():
     """
     Create a Machine Learning pipeline with CountVectorizer, TfidfTransformer,
-    and Random Forest Classifier with multiple labels
+    and Random Forest Classifier with multiple labels, then use Grid Search
+    to find the best parameters for model
     """
-    model = Pipeline([
+    pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(RandomForestClassifier(verbose=True)))
     ])
 
-    return model
+    parameters = {'clf__estimator__n_estimators': [50, 100, 150],
+                  'clf__estimator__min_samples_split': [2, 3, 4]}
+
+    cv = GridSearchCV(pipeline, param_grid=parameters)
+
+    return cv
 
 
-def get_score(y_true, y_pred, target_names):
+def evaluate_model(y_true, y_pred, target_names):
     """
     INPUT:
     y_true - True values
@@ -112,7 +120,7 @@ def main():
                         help='The path to the database')
     parser.add_argument('--table_name', type=str, default='response',
                         help='Name of the table containing the data to be extracted in the database')
-    parser.add_argument('--model_path', type=str, default='model.joblib',
+    parser.add_argument('--model_path', type=str, default='model.pkl',
                         help='The path you want to save the model')
     opt = parser.parse_args()
 
@@ -126,11 +134,11 @@ def main():
 
     # Get the evaluation score
     y_pred = model.predict(X_test)
-    res = get_score(y_test.values, y_pred, y.columns)
+    res = evaluate_model(y_test.values, y_pred, y.columns)
     print(res)
 
     # Save the model
-    joblib.dump(model, opt.save_path)
+    joblib.dump(model.best_estimator_, opt.save_path)
 
 
 if __name__ == '__main__':
